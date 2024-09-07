@@ -10,3 +10,16 @@ This section provides an overview of integrating Celery with Django to handle as
 
 - **Scheduling Tasks**:
   -  Use Celery to schedule tasks at specified intervals, enabling periodic execution of tasks for maintenance, data updates, and more.
+    
+## 📚 Task: Integrate Celery with Django for Asynchronous Email Sending
+
+### 1. Install Celery and Set Up Django Settings:
+- Install `celery` and `redis` as the message broker.
+- Configure Celery in Django's settings and create a task to send an email asynchronously.
+
+### 2. Define an Asynchronous Task:
+- Create a task to send a email when a user registers (Welcome to our platform).
+- The email should be sent asynchronously using Celery.
+
+### 3. Schedule a Periodic Task:
+- Set up Celery Beat to schedule a task that sends a randomly generated weekly newsletter.
