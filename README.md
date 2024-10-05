@@ -9,6 +9,7 @@ This section provides an overview of integrating Celery with Django to handle as
   - Learn how to run Celery tasks in a Django application, allowing for background processing of tasks.
 - **Scheduling Tasks** - https://django-celery-beat.readthedocs.io/en/latest/:
   -  Use Celery to schedule tasks at specified intervals, enabling periodic execution of tasks for maintenance, data updates, and more.
+- **Dajngo Celery Results** - https://django-celery-results.readthedocs.io/en/latest/
 
 ## 📚 Task: Integrate Celery with Django for Asynchronous Email Sending
 
