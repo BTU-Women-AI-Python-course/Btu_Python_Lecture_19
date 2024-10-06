@@ -58,42 +58,7 @@ def update_all_product_prices():
 
 This task updates the price of all products.
 
-### **5. Scheduling Tasks with `django-celery-beat`**
-
-To schedule tasks, you’ll use the Django Admin to set up periodic tasks. First, make sure you have the **Django Admin** enabled.
-
-In `admin.py`, register the periodic task models:
-
-```python
-# myproject/admin.py
-
-from django.contrib import admin
-from django_celery_beat.models import PeriodicTask, IntervalSchedule
-
-admin.site.register(PeriodicTask)
-admin.site.register(IntervalSchedule)
-```
-
-Then, start your Django server:
-
-```bash
-python manage.py runserver
-```
-
-Go to the Django Admin (`/admin`), and you’ll now see options for **Interval Schedules** and **Periodic Tasks**.
-
-1. **Create an Interval** (e.g., every 10 minutes):
-   - Go to **Interval Schedules** in the admin.
-   - Create a new schedule (e.g., every 10 minutes).
-
-2. **Create a Periodic Task**:
-   - Go to **Periodic Tasks** in the admin.
-   - Add a new task:
-     - **Name**: `Update Product Prices`
-     - **Task (import path)**: `product.tasks.update_all_product_prices`
-     - **Interval**: Select the interval you just created (e.g., every 10 minutes).
-
-### **6. Running the Scheduler**
+### **5. Running the Scheduler**
 
 To start the periodic task scheduler, you need to run the Celery **beat** service along with your worker:
 
