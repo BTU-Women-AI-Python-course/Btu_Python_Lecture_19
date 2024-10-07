@@ -39,8 +39,7 @@
           
            for index, product in enumerate(products, start=1):
                product.order = index  # Set the order field
-          
-           Product.objects.bulk_update(products, ['order'])
+               product.save(updated_fields=['order'])
           
            self.stdout.write(f"Updated order for {products.count()} products")
            
