@@ -63,7 +63,7 @@ This task updates the price of all products.
 To start the periodic task scheduler, you need to run the Celery **beat** service along with your worker:
 
 ```bash
-celery -A myproject beat --loglevel=INFO
+celery -A myproject beat --loglevel=INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
 ```
 
 Also, run the Celery worker in another terminal:
