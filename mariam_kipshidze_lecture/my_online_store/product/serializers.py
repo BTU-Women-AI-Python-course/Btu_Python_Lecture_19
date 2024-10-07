@@ -80,3 +80,9 @@ class ProductDynamicFieldsSerializer(DynamicFieldsSerializer):
     class Meta:
         model = Product
         fields = '__all__'
+
+
+class ProductUpdatePriceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ['id', 'price']

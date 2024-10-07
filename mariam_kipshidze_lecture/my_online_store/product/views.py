@@ -6,10 +6,11 @@ from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
 from product.filters import ProductFilter
+from product.tasks import update_product_price
 from product.models import Product
 from product.pagination import SmallPageNumberPagination, ProductLimitOffsetPagination, ProductCursorPagination
 from product.serializers import ProductSerializer, MutateProductSerializer, CreateProductSerializer, \
-    ProductDynamicFieldsSerializer
+    ProductDynamicFieldsSerializer, ProductUpdatePriceSerializer
 from user.permissiopns import IsActiveUser
 
 
@@ -59,9 +60,10 @@ class ProductCreateListDetailViewSet(
         serializer = self.get_serializer(latest_products, many=True)
         return Response(serializer.data)
 
-    @action(detail=True, methods=['get'], permission_classes=[IsAuthenticated],
-            serializer_class=MutateProductSerializer)
-    def product_data(self, request, *args, **kwargs):
+    @action(detail=True, methods=['post'], serializer_class=ProductUpdatePriceSerializer)
+    def update_product_price(self, request, *args, **kwargs):
         product = self.get_object()
-        serializer = self.get_serializer(product)
-        return Response(serializer.data)
+        serializer = ProductUpdatePriceSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        update_product_price.delay(product.id, serializer.data['price'])
+        return Response({'product_id': product.id, 'message': 'Product has been updated!'})
