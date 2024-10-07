@@ -10,3 +10,12 @@ def update_product_price(product_id, new_price):
         return f"Product {product.title} price updated to {new_price}"
     except Product.DoesNotExist:
         return f"Product with id {product_id} does not exist"
+
+
+@shared_task
+def update_products_price():
+    products = Product.objects.all()
+    for product in products:
+        product.price = 100
+        product.save(update_fields=['price'])
+    return f"Products price updated to 100"
