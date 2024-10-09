@@ -43,6 +43,10 @@ INSTALLED_APPS = [
 
     # My Apps
     "users",
+
+    # Third-party
+    "django_celery_results",
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -129,3 +133,4 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CELERY_BROKER_URL = os.environ.get("REDIS_URI")
+CELERY_RESULT_BACKEND = 'django-db'
